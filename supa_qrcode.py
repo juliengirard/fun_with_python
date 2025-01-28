@@ -83,12 +83,12 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
 
 
 # Define the inputs directly in the code
-url = "https://docs.google.com/document/d/1T9aYqe4tgVOAr-Qrg6P-e_bKCa11PPqK0phuPlSe2hE/preview"  # Your URL to encode
+url = "https://docs.google.com/forms/d/e/1FAIpQLScTjJzA8OjhIQEPpFp-su4izXcTFPr9hhZ5sB8MfJ5r-5FSwQ/viewform"  # Your URL to encode
 color = "#00276b"  # Your HEX color code (with #)
 background_color = "transparent"  # Background color (transparent or white)
 logo_path = "/Users/jgirard/Talks/IMAGES/RomanCoronagraph_art_Final_logo_blkcolor_small_crop.png"  # Path to logo (None if no logo)
 dot_style = "square"  # Choose either "square" or "round"
-output_path = "QR_RomanCoronagraph_Primer.png"  # Output file path
+output_path = "QR_RomanCoronagraph_CommunitySurvey.png"  # Output file path
 
 # Generate the QR code
 generate_qr_code(url, logo_path, color, background_color, output_path, dot_style)
