@@ -26,10 +26,16 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
     qr_width = len(matrix[0]) * qr.box_size  # Calculate width
     qr_height = len(matrix) * qr.box_size  # Calculate height
 
+    # Determine the background color based on the input
+    if background_color == "white":
+        background_color = (255, 255, 255)  # Solid white for background
+    elif background_color == "transparent":
+        background_color = (255, 255, 255, 0)  # Fully transparent
+
     # Create the QR code image
     if dot_style == 'round':
         # Custom round dot style using PIL
-        qr_image = Image.new('RGBA', (qr_width, qr_height), (255, 255, 255, 0))  # Transparent background
+        qr_image = Image.new('RGBA', (qr_width, qr_height), background_color)  # Background color based on input
         draw = ImageDraw.Draw(qr_image)
 
         # Create a round dot effect by drawing circles instead of squares
@@ -44,7 +50,7 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
         qr_image = qr_image.convert("RGBA")  # Ensure transparency if needed
     else:
         # Default square dot style
-        qr_image = Image.new('RGBA', (qr_width, qr_height), (255, 255, 255, 0))  # Transparent background
+        qr_image = Image.new('RGBA', (qr_width, qr_height), background_color)  # Background color based on input
         draw = ImageDraw.Draw(qr_image)
 
         # Draw the square QR code using the color provided
