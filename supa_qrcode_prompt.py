@@ -1,3 +1,10 @@
+# By Julien H. Girard with the help of chatGPT - 2025
+# Requires package
+#   pip install qrcode[pil] Pillow
+# To run
+#   python supa_qrcode_prompt.py
+# Change inputs at prompt. On a Mac you can drag and drop the logo file from finder, it will cope with the addtional space
+
 import qrcode
 from PIL import Image, ImageDraw
 
