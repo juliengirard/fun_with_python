@@ -1,3 +1,10 @@
+# By Julien H. Girard with the help of chatGPT - 2025
+# Requires package
+#   pip install qrcode[pil] Pillow
+# To run
+#   python supa_qrcode.py
+# Change inputs at bottom of code
+
 import qrcode
 from PIL import Image, ImageDraw
 
@@ -10,10 +17,10 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
         box_size=10,  # Size of each individual box in the QR code
         border=4,  # Thickness of the border
     )
-    
+
     qr.add_data(url)
     qr.make(fit=True)
-    
+
     # Get the matrix for the QR code (list of lists)
     matrix = qr.get_matrix()
     qr_width = len(matrix[0]) * qr.box_size  # Calculate width
@@ -53,15 +60,15 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
     if logo_path:
         logo_path = logo_path.strip()  # Strip any leading/trailing spaces from the logo path
         logo = Image.open(logo_path)
-        
+
         # Resize logo to fit in the center of the QR code (30% of the QR code size)
         qr_width, qr_height = qr_image.size
         logo_size = int(qr_width * 0.3), int(qr_height * 0.3)  # Logo takes up 30% of the QR code size
         logo = logo.resize(logo_size, Image.ANTIALIAS)
-        
+
         # Calculate position to center the logo
         logo_position = ((qr_width - logo_size[0]) // 2, (qr_height - logo_size[1]) // 2)
-        
+
         # Ensure the area around the logo is void of QR code dots (transparent)
         logo_box = (logo_position[0], logo_position[1], logo_position[0] + logo_size[0], logo_position[1] + logo_size[1])
         qr_image.paste((255, 255, 255, 0), logo_box)  # Clear the area around the logo (transparent)
