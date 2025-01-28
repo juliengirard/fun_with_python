@@ -26,10 +26,16 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
     qr_width = len(matrix[0]) * qr.box_size  # Calculate width
     qr_height = len(matrix) * qr.box_size  # Calculate height
 
+    # Determine background color mode (either transparent or white)
+    if background_color == "white":
+        background_color = (255, 255, 255)  # Solid white for background
+    elif background_color == "transparent":
+        background_color = (255, 255, 255, 0)  # Fully transparent
+
     # Create the QR code image
     if dot_style == 'round':
         # Custom round dot style using PIL
-        qr_image = Image.new('RGBA', (qr_width, qr_height), (255, 255, 255, 0))  # Transparent background
+        qr_image = Image.new('RGBA', (qr_width, qr_height), background_color)  # Background color based on input
         draw = ImageDraw.Draw(qr_image)
 
         # Create a round dot effect by drawing circles instead of squares
@@ -44,7 +50,7 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
         qr_image = qr_image.convert("RGBA")  # Ensure transparency if needed
     else:
         # Default square dot style
-        qr_image = Image.new('RGBA', (qr_width, qr_height), (255, 255, 255, 0))  # Transparent background
+        qr_image = Image.new('RGBA', (qr_width, qr_height), background_color)  # Background color based on input
         draw = ImageDraw.Draw(qr_image)
 
         # Draw the square QR code using the color provided
@@ -83,12 +89,14 @@ def generate_qr_code(url, logo_path=None, color='black', background_color='trans
 
 
 # Define the inputs directly in the code
-url = "https://docs.google.com/forms/d/e/1FAIpQLScTjJzA8OjhIQEPpFp-su4izXcTFPr9hhZ5sB8MfJ5r-5FSwQ/viewform"  # Your URL to encode
+url = "https://forms.gle/gL7GSmFqiSNuYS8G6"  # Your URL to encode
+#url = "https://docs.google.com/document/d/1T9aYqe4tgVOAr-Qrg6P-e_bKCa11PPqK0phuPlSe2hE/preview" # Roman Coronagraph Primer
 color = "#00276b"  # Your HEX color code (with #)
-background_color = "transparent"  # Background color (transparent or white)
-logo_path = "/Users/jgirard/Talks/IMAGES/RomanCoronagraph_art_Final_logo_blkcolor_small_crop.png"  # Path to logo (None if no logo)
-dot_style = "square"  # Choose either "square" or "round"
-output_path = "QR_RomanCoronagraph_CommunitySurvey.png"  # Output file path
-
+background_color = "white"  # Background color (transparent or white)
+#logo_path = "/Users/jgirard/Talks/IMAGES/RomanCoronagraph_art_Final_logo_blkcolor_small_crop.png"  # Path to logo (None if no logo)
+logo_path = "/Users/jgirard/Downloads/roman_coronagraph_logo.png" # Path to white logo
+dot_style = "square"  # Choose either "square" or "round" 
+output_path = "QR_RomanCoronagraph_CommunitySurvey_white.png"  # Output file path
+#output_path = "QR_RomanCoronagraph_Primer_white.png"  # Output file path
 # Generate the QR code
 generate_qr_code(url, logo_path, color, background_color, output_path, dot_style)
